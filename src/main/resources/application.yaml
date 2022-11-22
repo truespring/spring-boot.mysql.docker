@@ -11,18 +11,3 @@ spring:
     password: docker
     username: docker
     url: jdbc:mysql://localhost:33066/test?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
-
----
-#spring:
-#  profiles:
-#    active: docker
-#  jpa:
-#    show-sql: false
-#    generate-ddl: false
-#    hibernate:
-#      ddl-auto: create
-#  datasource:
-#    url: jdbc:mysql://host.docker.internal:33066/test?characterEncoding=UTF-8&serverTimezone=UTC
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    password: docker
-#    username: docker
