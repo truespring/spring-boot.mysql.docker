@@ -4,7 +4,6 @@ import com.rubok.docker.biz.entity.dto.request.FasstoRequestDTO;
 import com.rubok.docker.biz.entity.dto.response.FasstoResponseDTO;
 import com.rubok.docker.biz.enums.Part;
 import com.rubok.docker.common.BaseTimeEntity;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,7 +29,6 @@ public class Fassto extends BaseTimeEntity {
     @Column(name = "use_yn", nullable = false)
     private boolean useYn;
 
-    @Builder
     private Fassto(String name, Part part) {
         this.name = name;
         this.part = part;
@@ -38,18 +36,19 @@ public class Fassto extends BaseTimeEntity {
     }
 
     public static Fassto saveOf(final FasstoRequestDTO requestDTO) {
-        return Fassto.builder()
-                .name(requestDTO.getName())
-                .part(requestDTO.getPart())
-                .build();
+        return new Fassto(requestDTO.name(), requestDTO.part());
     }
 
     public void deleteOf() {
         this.useYn = false;
     }
 
+    public void useOf() {
+        this.useYn = true;
+    }
+
     public static FasstoResponseDTO fasstoToFasstoResponseDTO(final Fassto fassto) {
-        return new FasstoResponseDTO(fassto.getFasstoSeq(), fassto.getName(), fassto.getPart());
+        return new FasstoResponseDTO(fassto.getFasstoSeq(), fassto.getName(), fassto.getPart(), fassto.getCreatedDate(), fassto.getModifiedDate());
     }
 
     @Override

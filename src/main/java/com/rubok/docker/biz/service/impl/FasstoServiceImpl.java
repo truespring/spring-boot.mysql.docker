@@ -7,6 +7,7 @@ import com.rubok.docker.biz.repository.FasstoRepository;
 import com.rubok.docker.biz.service.FasstoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,15 +23,25 @@ public class FasstoServiceImpl implements FasstoService {
     }
 
     @Override
+    @Transactional
     public FasstoResponseDTO saveNewFassto(final FasstoRequestDTO requestDTO) {
         Fassto fassto = Fassto.saveOf(requestDTO);
         return Fassto.fasstoToFasstoResponseDTO(fasstoRepository.save(fassto));
     }
 
     @Override
+    @Transactional
     public FasstoResponseDTO deleteOfFassto(final Long fasstoSeq) {
         Fassto fassto = fasstoRepository.findByFasstoSeq(fasstoSeq);
         fassto.deleteOf();
+        return Fassto.fasstoToFasstoResponseDTO(fassto);
+    }
+
+    @Override
+    @Transactional
+    public FasstoResponseDTO useOfFassto(final Long fasstoSeq) {
+        Fassto fassto = fasstoRepository.findByFasstoSeq(fasstoSeq);
+        fassto.useOf();
         return Fassto.fasstoToFasstoResponseDTO(fassto);
     }
 }

@@ -9,5 +9,6 @@ public interface FasstoService {
     List<FasstoResponseDTO> findFasstosByUseYnTrue();
     FasstoResponseDTO saveNewFassto(final FasstoRequestDTO requestDTO);
     FasstoResponseDTO deleteOfFassto(final Long fasstoSeq);
+    FasstoResponseDTO useOfFassto(final Long fasstoSeq);
 
 }
